@@ -1,0 +1,373 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
+
+@font-face {
+  font-family: 'PFBold';
+  src: url('./assets/PFDinDisplayPro-Bold.woff') format('woff');
+  font-style: normal;
+  font-weight: normal;
+}
+
+:root {
+  --backgroundOverlayColor: rgba(117, 182, 255, 0.1);
+  --backgroundOverlayRadialSecondColor: rgba(0,0,0,0.1);
+
+  --normalColors: rgba(117, 182, 255,1.0);
+  --accentColors: rgba(59, 151, 255,1.0);
+
+  --loadingBarPulsatingColorsOn1: rgba(255, 255, 255, 1);
+  --loadingBarPulsatingColorsOn2: rgba(117, 182, 255, 0.5);
+  --loadingBarPulsatingColorsOn3: rgba(105, 135, 255, 1);
+  --loadingBarPulsatingColorsOff1: rgba(255, 255, 255, 0);
+  --loadingBarPulsatingColorsOff2: rgba(117, 182, 255, 0.5);
+  --loadingBarPulsatingColorsOff3: rgba(105, 135, 255, 0.3);
+  --loadingBarActiveColors1: rgba(255, 255, 255, 0.9);
+  --loadingBarActiveColors2: rgba(117, 182, 255, 0.5);
+  --loadingBarActiveColors3: rgba(117, 182, 214, 0.5);
+  --loadingBarInactiveColors1: rgba(117, 182, 255, 0.4);
+  --loadingBarInactiveColors2: rgba(117, 182, 255, 0.1);
+
+  --gradientEffectColors: #ee7752, #e73c7e, #23a6d5, #20e96d;
+}
+
+html {
+  overflow: hidden;
+  font-family: "Comfortaa", cursive;
+  background-color: black;
+}
+
+body {
+  cursor: none;	
+}
+
+video {
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
+}
+
+.cursor {
+  position: absolute;
+  height: 1.5vw;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.video {
+  position: absolute;
+  object-fit: fill;
+  top: -5%;
+  left: -5%;
+
+  width: 110%;
+  height: 110%;
+  z-index: -1;
+}
+
+.main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--backgroundOverlayColor);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.backgroundEffect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 50;
+}
+
+.videoBackground {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.serverLogo {
+  background-image: url("./assets/logo.png");
+  background-size: contain;
+  background-position: center;
+  position: absolute;
+  top: 1.5vw;
+  left: 1.5vw;
+  z-index: 200;
+  width: 8vw;
+  height: 8vw;
+  animation: none;
+  animation-timing-function: cubic-bezier(0.64, 0.57, 0.67, 1.53);
+}
+
+.serverName {
+  position: absolute;
+  font-family: 'PFBold';
+  top: 2.15vw;
+  left: 9.0vw;
+  font-size: 5.5vw;
+  background: -webkit-linear-gradient(325deg,rgba(255,255,255,0.75) 25%, transparent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 10;
+  user-select: none;
+  opacity: 0.25;
+}
+
+.serverPlayerCount {
+  position: absolute;
+  font-family: 'PFBold';
+  top: 2.15vw;
+  right: 4.0vw;
+  font-size: 5.5vw;
+  background: -webkit-linear-gradient(325deg,rgba(255,255,255,0.75) 25%, transparent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 10;
+  user-select: none;
+  opacity: 0.25;
+}
+
+@keyframes rotatingLogo {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  15% {
+    transform: rotate(360deg);
+  }
+
+  30% {
+    transform: rotate(-25deg);
+  }
+
+  40% {
+    transform: rotate(25deg);
+  }
+
+  45% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.loadingText {
+  position: absolute;
+  bottom: 1.8vw;
+  left: 3.3vw;
+  text-align: center;
+  font-size: 1.5vw;
+  user-select: none;
+}
+
+.loadingText span {
+  user-select: none;
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  text-transform: uppercase;
+  animation: waves 1.25s infinite;
+  animation-delay: calc(0.1s * var(--i));
+}
+
+@keyframes waves {
+  0%,
+  40%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-20px);
+  }
+}
+
+ul {
+  height: 0.65vw;
+  width: 28.5vw;
+  position: absolute;
+  left: 49.25%;
+  transform: translate(-50%,-50%);
+  bottom: 2.0vw;
+  margin: auto;
+}
+
+li {
+  display: block;
+  float: left;
+  width: 5vw;
+  height: 0.65vw;
+  margin-right: 0.5vw;
+  border: 0.05vw solid rgba(0,0,0,0.25);
+}
+
+.activeBar {
+  background: var(--loadingBarActiveColors1);
+  box-shadow: inset 0px 0px 10px 2px var(--loadingBarActiveColors2),
+    0px 0px 20px var(--loadingBarActiveColors3);
+}
+
+.inactiveBar {
+  box-shadow: inset 0px 0px 10px 1px var(--loadingBarInactiveColors1),
+    0px 0px 20px var(--loadingBarInactiveColors2);
+}
+
+.activePulsatingBar {
+  animation: pulse 1s alternate infinite;
+}
+
+.normalLoadingBar {
+  position: absolute;
+  bottom: 2vw;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.progressBar {
+  width: 27vw;
+  box-shadow: inset 0px 0px 10px 1px var(--loadingBarInactiveColors1),
+    0px 0px 20px var(--loadingBarInactiveColors2);
+  border-radius: 0.45vw;
+  transition: background-color 0.5s;
+}
+
+.bar {
+  background: var(--loadingBarActiveColors1);
+  box-shadow: inset 0px 0px 10px 2px var(--loadingBarActiveColors2),
+    0px 0px 20px var(--loadingBarActiveColors3);
+  width: 2.5%;
+  height: 0.65vw;
+  transition: width 0.5s linear;
+  border-radius: 0.45vw;
+  transition: background-color 0.5s;
+}
+
+#barPoint {
+  background: var(--loadingBarActiveColors1);
+  box-shadow: inset 0px 0px 10px 2px var(--loadingBarActiveColors2),
+    0px 0px 20px var(--loadingBarActiveColors3);
+  width: 0.75vw;
+  height: 100%;
+  float: right;
+  animation: pulse 1.25s ease-in-out infinite alternate;
+  border-radius: 0.45vw;
+  transition: background-color 0.5s;
+}
+
+@keyframes pulse {
+  from {
+    background: var(--loadingBarPulsatingColorsOn1);
+    box-shadow: inset 0px 0px 10px 2px var(--loadingBarPulsatingColorsOn2),
+      0px 0px 40px 2px var(--loadingBarPulsatingColorsOn3);
+  }
+  to {
+    background: var(--loadingBarPulsatingColorsOff1);
+    box-shadow: inset 0px 0px 10px 2px var(--loadingBarPulsatingColorsOff2),
+      0px 0px 30px 2px var(--loadingBarPulsatingColorsOff3);
+  }
+}
+
+
+.textBox {
+  height: auto;
+  width: 28.75vw;
+  color: white;
+  font-size: 1.0vw;
+  position: absolute;
+  bottom: 2.0vw;
+  right: 3.3vw;
+  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  text-shadow: 0.1vw 0.1vw rgba(0,0,0,0.75);
+}
+
+.slide {
+  user-select: none;
+  display: none;
+  flex-direction: row;
+}
+
+.musicPlayer {
+  position: absolute;
+  left: 50%;
+  top: 2.25vw;
+  transform: translate(-50%,-50%);
+}
+
+.musicPlayerButton {
+  cursor: none;
+  pointer-events: all;
+  bottom: 2.0vw;
+  color: var(--normalColors);
+  text-shadow: 5px 3px 10px rgba(0,0,0,0.55);
+  border-radius: 10vw;
+  background: transparent;
+  position: absolute;
+  font-size: 3vw;
+  height: 1.5vw;
+  width: 1.5vw;
+  text-align: center;
+  border: none;
+  left: 20vw;
+  transform: translate(-50%, -50%);
+}
+
+.musicPlayerSlider {
+  cursor: none;
+  pointer-events: all;
+  -webkit-appearance: none;
+  box-shadow: 10px 5px 5px rgba(0,0,0,0.55);
+  position: absolute;
+  bottom: 2.2vw;
+  left: 24.25vw;
+  width: 10vw;
+  height: 0.25vw;
+  background: #000;
+  outline: none;
+  border: 0.15vw solid var(--accentColors);
+  border-radius: 0.5vw;
+}
+
+.musicPlayerSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 1.5vw;
+  background: #000;
+  border: 0.15vw solid var(--accentColors);
+  border-radius: 0.25vw;
+}
+
+.gradientEffect {
+	background: linear-gradient(-45deg, var(--gradientEffectColors));
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 25%;
+	}
+  25% {
+    background-position: 25% 50%;
+  }
+	50% {
+		background-position: 100% 50%;
+	}
+  75% {
+    background-position: 50% 25%;
+  }
+	100% {
+		background-position: 0% 25%;
+	}
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="libs/jquery.particleground.min.js"></script>
+    <script src="libs/geometryangle.min.js"></script>
+    <script src="libs/particle.min.js"></script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    
+    <img id="cursor" class="cursor" src="./assets/cursor.png"/>
+    <div class="videoBackground" id="videoBackground">
+        <video id="video" autoplay muted loop>
+            <source src="./assets/video.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="backgroundEffect" id="backgroundEffect"></div>
+    <div id="main" class="main">
+        <div class="serverLogo" id="serverLogo"></div>
+        <div class="loadingText">
+            <span style="--i:1">L</span>
+            <span style="--i:2">O</span>
+            <span style="--i:3">A</span>
+            <span style="--i:4">D</span>
+            <span style="--i:5">I</span>
+            <span style="--i:6">N</span>
+            <span style="--i:7">G</span>
+            <span style="--i:8">.</span>
+            <span style="--i:9">.</span>
+            <span style="--i:10">.</span>
+        </div>
+        <ul id="segmentedBar">
+            <li class="inactiveBar" id="loadingBar1"></li>
+            <li class="inactiveBar" id="loadingBar2"></li>
+            <li class="inactiveBar" id="loadingBar3"></li>
+            <li class="inactiveBar" id="loadingBar4"></li>
+            <li class="inactiveBar" id="loadingBar5"></li>
+        </ul>
+        <div id="normalBar" class="normalLoadingBar">
+            <div id="progressBar" class="progressBar">
+                <div id="bar" class="bar">
+                    <div id="barPoint"></div>
+                </div>
+            </div>
+        </div>
+        <div class="textBox" id="textBox"></div>
+        <div id="musicPlayerDiv">
+            <audio id="musicPlayer" src="assets/music.mp3" autoplay></audio>
+            <div> 
+                <button onmouseover="$('#'+this.id).css('color','var(--accentColors)')" onmouseout="$('#'+this.id).css('color','var(--normalColors)')" class="musicPlayerButton" id="musicPlayerButton" onclick="handlePlayPauseMusic()"><i class="fa-solid fa-circle-play"></i></button> 
+                <input class="musicPlayerSlider" id="musicPlayerSlider" type="range" min="0" max="100" value="100" step="1" onchange="setVolume('musicPlayer',this.value)" />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
