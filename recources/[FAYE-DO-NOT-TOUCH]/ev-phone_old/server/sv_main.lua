@@ -1,0 +1,5 @@
+Citizen.CreateThread(function()
+    local deleteEmails = Await(SQL.execute("DELETE FROM character_emails", {}))
+    local deleteTwitter = Await(SQL.execute("DELETE FROM phone_tweets", {}))
+    local deleteYp = Await(SQL.execute("DELETE FROM phone_yp", {}))
+end)
